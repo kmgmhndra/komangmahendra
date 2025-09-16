@@ -1,20 +1,20 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation' 
-import { useContext, useRef, useEffect, useState } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { useContext, useRef, useEffect, useState, Suspense } from 'react'
 import gsap from 'gsap'
 import Hero from '@/components/ui/Hero'
 import Profile from '@/components/ui/Profile'
-import Header from '@/components/ui/Header' // ✅ panggil header disini
-import About from '@/components/ui/About' // Import komponen About
+import Header from '@/components/ui/Header'
+import About from '@/components/ui/About'
 import Certificates from '@/components/ui/Certificates'
 import Contact from '@/components/ui/Contact'
 import Projects from '@/components/ui/Projects'
-import Publications from '@/components/ui/Publications' // Import komponen Publications
+import Publications from '@/components/ui/Publications'
 import { LoaderContext } from '@/context/LoaderContext'
 
-// Loader component dipindah ke page
-const EnhancedLoader = ({ onEnter }: { onEnter: () => void }) => {  
+// KOMPONEN LOADER (TIDAK ADA PERUBAHAN)
+const EnhancedLoader = ({ onEnter }: { onEnter: () => void }) => {
   const [progress, setProgress] = useState(0)
   const [loadingText, setLoadingText] = useState('INITIALIZING')
   const [isComplete, setIsComplete] = useState(false)
@@ -62,7 +62,6 @@ const EnhancedLoader = ({ onEnter }: { onEnter: () => void }) => {
           {loadingText}
         </p>
 
-        {/* Progress bar */}
         <div className="w-80 max-w-sm mb-8">
           <div className="h-0.5 bg-gray-800 rounded-full overflow-hidden">
             <div
@@ -99,6 +98,35 @@ const EnhancedLoader = ({ onEnter }: { onEnter: () => void }) => {
   )
 }
 
+
+// ====================================================================
+// ===== LANGKAH 1: BUAT KOMPONEN BARU UNTUK LOGIKA SEARCH PARAMS =====
+// ====================================================================
+function HandleSearchParams() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section === 'projects') {
+      // Menambahkan id 'projects' ke section yang sesuai jika belum ada
+      const projectsElement = document.getElementById('projects');
+      if (projectsElement) {
+        projectsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Mengganti URL tanpa me-reload halaman untuk membersihkan search param
+        router.replace('/', { scroll: false });
+      }
+    }
+  }, [searchParams, router]);
+
+  // Komponen ini tidak merender UI apapun
+  return null;
+}
+
+
+// ====================================================================
+// ===== LANGKAH 2: MODIFIKASI KOMPONEN PAGE UTAMA =====
+// ====================================================================
 export default function Page() {
   const loaderRef = useRef(null)
 
@@ -108,21 +136,7 @@ export default function Page() {
   }
   const { isLoading, setIsLoading } = context;
 
-  const router = useRouter();
-
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    const section = searchParams.get('section');
-    if (section === 'projects') {
-      const projectsElement = document.getElementById('projects');
-      if (projectsElement) {
-        projectsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        router.replace('/', { scroll: false });
-      }
-    }
-  // 4. TAMBAHKAN `router` ke dalam dependency array
-  }, [searchParams, router]); 
-  
+  // Logika searchParams sudah dipindah ke komponen HandleSearchParams
 
   const handleEnterExperience = () => {
     if (loaderRef.current) {
@@ -149,16 +163,18 @@ export default function Page() {
   return (
     <main className="relative">
 
-      {/* Header fixed */}
+      {/* Panggil komponen baru di dalam Suspense */}
+      <Suspense fallback={null}>
+        <HandleSearchParams />
+      </Suspense>
+
       <Header />
 
-      {/* Hero tetap fixed di belakang */}
       <div className="sticky top-0 h-screen w-full z-0">
         <Hero />
         <div className="absolute inset-0 pointer-events-none transition-all duration-300 bg-black/30 backdrop-blur-lg opacity-0 group-[.scrolled]:opacity-100 z-10" />
       </div>
 
-      {/* Profile menutup Hero ketika discroll */}
       <section className="relative z-10 min-h-screen bg-black/50 backdrop-blur-md mx-2 md:mx-12 lg:mx-26 mb-16 ">
         <Profile />
       </section>
@@ -167,7 +183,8 @@ export default function Page() {
         <About />
       </section>
 
-      <section className="relative z-10 min-h-screen bg-black/50 backdrop-blur-md mx-2 md:mx-12 lg:mx-26 mb-16">
+      {/* Pastikan section ini punya id="projects" agar bisa di-scroll */}
+      <section id="projects" className="relative z-10 min-h-screen bg-black/50 backdrop-blur-md mx-2 md:mx-12 lg:mx-26 mb-16">
         <Projects/>
       </section>
 
