@@ -1,9 +1,59 @@
 'use client';
 
-import { Project } from '@/data/projects';
-import Image from 'next/image';
+// Import tipe data, termasuk 'Feature'
+import { Project, ProjectStatus, Feature } from '@/data/projects';
+import Image from 'next/image'; // Import Image dari Next.js
 import Link from 'next/link';
-import { ArrowUpRight, Github, LayoutTemplate, Zap, FileText, Code, Palette, Rocket, Shield } from 'lucide-react';
+
+// Import semua ikon yang Anda gunakan di data 'keyFeatures'
+import { 
+    ArrowUpRight, Github, LayoutTemplate, Zap, FileText, Code, Palette, Rocket, Shield, 
+    BrainCircuit, ClipboardCheck, BarChart3, Database, ListChecks, TrendingUp, Users, 
+    BookOpen, Calendar, ShoppingBasket, LayoutDashboard, ShieldCheck, Activity, Siren, 
+    DollarSign, FilePieChart, History, WifiOff, MapPin, CloudUpload, Gem, LineChart, 
+    SwatchBook, Type, LayoutGrid, PenTool, Award, FileScan, 
+    Image as ImageIcon // Mengganti nama ikon 'Image' untuk menghindari konflik
+} from 'lucide-react';
+
+// Pemetaan dari string ke komponen ikon untuk render dinamis
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    palette: Palette,
+    code: Code,
+    zap: Zap,
+    shield: Shield,
+    'brain-circuit': BrainCircuit,
+    'clipboard-check': ClipboardCheck,
+    'bar-chart-3': BarChart3,
+    database: Database,
+    'list-checks': ListChecks,
+    'trending-up': TrendingUp,
+    users: Users,
+    'file-text': FileText,
+    'book-open': BookOpen,
+    image: ImageIcon, // Menggunakan nama baru 'ImageIcon'
+    calendar: Calendar,
+    'shopping-basket': ShoppingBasket,
+    'layout-dashboard': LayoutDashboard,
+    'shield-check': ShieldCheck,
+    activity: Activity,
+    siren: Siren,
+    'dollar-sign': DollarSign,
+    'file-pie-chart': FilePieChart,
+    history: History,
+    'wifi-off': WifiOff,
+    'map-pin': MapPin,
+    'cloud-upload': CloudUpload,
+    gem: Gem,
+    'layout-template': LayoutTemplate,
+    'line-chart': LineChart,
+    'bar-chart-big': BarChart3,
+    'swatch-book': SwatchBook,
+    type: Type,
+    'layout-grid': LayoutGrid,
+    'pen-tool': PenTool,
+    award: Award,
+    'file-scan': FileScan
+};
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
     return (
@@ -13,7 +63,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
                 <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
-                {/* Animated mesh background */}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
             </div>
 
@@ -69,9 +118,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                     ))}
                                 </span>
                             </h1>
-
+                            
                             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-                                {project.longDescription}
+                                {project.description}
                             </p>
 
                             {/* Action Buttons */}
@@ -88,15 +137,6 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                         <Rocket className="relative z-10 w-5 h-5 transform group-hover:rotate-12 transition-transform duration-300" />
                                     </a>
                                 )}
-                                {/* <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-gray-800/50 border border-gray-700 rounded-full font-bold text-white hover:border-cyan-400/50 transition-all duration-300 hover:scale-105"
-                >
-                  <Github className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                  <span>View Source</span>
-                </a> */}
                             </div>
                         </div>
                     </div>
@@ -106,22 +146,18 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 <section className="px-4 mb-16">
                     <div className="container mx-auto max-w-6xl">
                         <div className="relative group">
-                            {/* Glow effect */}
                             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
-
-                            {/* Image container */}
                             <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800/50 rounded-2xl overflow-hidden shadow-2xl">
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5"></div>
                                 <div className="aspect-video relative">
                                     <Image
                                         src={project.image}
                                         alt={`Screenshot of ${project.title}`}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
+                                        style={{ objectFit: 'cover' }}
                                         priority
                                         className="transition-all duration-700 group-hover:scale-105"
                                     />
-                                    {/* Overlay gradient */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                                 </div>
                             </div>
@@ -129,16 +165,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                     </div>
                 </section>
 
-
-
                 {/* Content Grid */}
                 <section className="px-4 pb-16">
                     <div className="container mx-auto max-w-6xl">
                         <div className="grid lg:grid-cols-3 gap-8">
-
                             {/* Main Content */}
                             <div className="lg:col-span-2 space-y-12">
-
                                 {/* Project Overview */}
                                 <div className="group">
                                     <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-8 hover:border-cyan-500/30 transition-all duration-300">
@@ -148,48 +180,44 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                             </div>
                                             Project Overview
                                         </h2>
-                                        <div className="prose prose-lg prose-invert max-w-none text-gray-300 space-y-6 leading-relaxed">
-                                            <p className="text-lg">
-                                                Proyek ini berfokus pada pengembangan solusi digital yang modern dan efisien. Selama proses pengerjaan, penekanan utama diberikan pada arsitektur kode yang bersih, performa yang cepat, dan pengalaman pengguna yang intuitif dan menyenangkan.
-                                            </p>
-                                            <p>
-                                                Dengan memanfaatkan teknologi terdepan dan best practices dalam development, proyek ini dirancang untuk memberikan value maksimal kepada pengguna sambil mempertahankan skalabilitas dan maintainability code.
-                                            </p>
-                                        </div>
+                                        <div
+                                            className="prose prose-lg prose-invert max-w-none text-gray-300 space-y-6 leading-relaxed"
+                                            dangerouslySetInnerHTML={{ __html: project.longDescription }}
+                                        />
                                     </div>
                                 </div>
 
-                                {/* Key Features */}
-                                <div className="group">
-                                    <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/30 transition-all duration-300">
-                                        <h2 className="flex items-center gap-3 text-3xl font-bold mb-6">
-                                            <div className="p-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg">
-                                                <Zap className="w-6 h-6 text-purple-400" />
-                                            </div>
-                                            Key Features
-                                        </h2>
-                                        <div className="grid sm:grid-cols-2 gap-4">
-                                            {[
-                                                { icon: Palette, title: 'Responsive Design', desc: 'Perfect on all devices' },
-                                                { icon: Code, title: 'Modern UI/UX', desc: 'Clean and intuitive interface' },
-                                                { icon: Zap, title: 'Fast Performance', desc: 'Optimized for speed' },
-                                                { icon: Shield, title: 'SEO Friendly', desc: 'Search engine optimized' }
-                                            ].map((feature, i) => (
-                                                <div key={i} className="group/item bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700/50 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105">
-                                                    <div className="flex items-start gap-3 mb-3">
-                                                        <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg group-hover/item:scale-110 transition-transform duration-300">
-                                                            <feature.icon className="w-5 h-5 text-cyan-400" />
-                                                        </div>
-                                                        <div>
-                                                            <h3 className="font-bold text-white mb-1">{feature.title}</h3>
-                                                            <p className="text-sm text-gray-400">{feature.desc}</p>
-                                                        </div>
-                                                    </div>
+                                {/* Key Features Section (Dynamic) */}
+                                {project.keyFeatures && project.keyFeatures.length > 0 && (
+                                    <div className="group">
+                                        <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-8 hover:border-purple-500/30 transition-all duration-300">
+                                            <h2 className="flex items-center gap-3 text-3xl font-bold mb-6">
+                                                <div className="p-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg">
+                                                    <Zap className="w-6 h-6 text-purple-400" />
                                                 </div>
-                                            ))}
+                                                Key Features
+                                            </h2>
+                                            <div className="grid sm:grid-cols-2 gap-4">
+                                                {project.keyFeatures.map((feature, i) => {
+                                                    const IconComponent = iconMap[feature.icon] || FileText;
+                                                    return (
+                                                        <div key={i} className="group/item bg-gradient-to-br from-gray-800/30 to-gray-900/30 border border-gray-700/50 rounded-xl p-6 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105">
+                                                            <div className="flex items-start gap-3 mb-3">
+                                                                <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg group-hover/item:scale-110 transition-transform duration-300">
+                                                                    <IconComponent className="w-5 h-5 text-cyan-400" />
+                                                                </div>
+                                                                <div>
+                                                                    <h3 className="font-bold text-white mb-1">{feature.title}</h3>
+                                                                    <p className="text-sm text-gray-400">{feature.description}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
 
                             {/* Sidebar */}
@@ -220,10 +248,20 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                         <div className="space-y-3">
                                             <div className="flex justify-between items-center">
                                                 <span className="text-gray-400">Status</span>
-                                                <div className="flex items-center gap-2">
-                                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                                    <span className="text-green-400 font-medium">Live</span>
-                                                </div>
+                                                {(() => {
+                                                    const statusStyles: Record<ProjectStatus, { dotColor: string; textColor: string; text: string }> = {
+                                                        Live: { dotColor: 'bg-green-400', textColor: 'text-green-400', text: 'Live' },
+                                                        Completed: { dotColor: 'bg-cyan-400', textColor: 'text-cyan-400', text: 'Completed' },
+                                                        'In Development': { dotColor: 'bg-yellow-400', textColor: 'text-yellow-400', text: 'In Development' }
+                                                    };
+                                                    const currentStatus = statusStyles[project.status] || statusStyles.Completed;
+                                                    return (
+                                                        <div className="flex items-center gap-2">
+                                                            <div className={`w-2 h-2 ${currentStatus.dotColor} rounded-full animate-pulse`}></div>
+                                                            <span className={`${currentStatus.textColor} font-medium`}>{currentStatus.text}</span>
+                                                        </div>
+                                                    );
+                                                })()}
                                             </div>
                                             <div className="flex justify-between items-center">
                                                 <span className="text-gray-400">Category</span>
