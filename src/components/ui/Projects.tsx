@@ -5,7 +5,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Layers, Palette } from 'lucide-react';
 
 // 1. Impor data dan tipe dari file terpisah yang sudah kita buat
 import { projectsData, categories } from '@/data/projects';
@@ -54,6 +54,15 @@ export default function Projects() {
             <span>{category.label}</span>
           </button>
         ))}
+        <Link
+          href="/mockups" // <-- GANTI: Arahkan ke /mockups
+          className="px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 
+                     bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white 
+                     backdrop-blur-md border border-white/20"
+        >
+          <Layers className="h-4 w-4" /> {/* <-- GANTI: Ikon baru */}
+          <span>Mockup Gallery</span> {/* <-- GANTI: Teks baru */}
+        </Link>
       </motion.div>
 
       {/* Projects Count */}

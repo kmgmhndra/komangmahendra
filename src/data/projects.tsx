@@ -40,10 +40,10 @@ export const projectsData: Project[] = [
       <p>Built with modern web technologies, Dievaluasi offers a seamless, responsive experience across all devices. The comprehensive analytics dashboard empowers users to track their progress, visualize improvement patterns, and make data-driven decisions about their study strategy.</p>
     `,
     image: "/assets/images/project/web1.png",
-    githubUrl: "https://github.com/rakudev2025/raku-dev",
+    githubUrl: "dievaluasi.id",
     category: "website",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
-    status: "In Development",
+    status: "Live",
     keyFeatures: [
       { icon: 'brain-circuit', title: 'AI-Powered Analysis', description: 'Analyzes user weaknesses and provides personalized learning recommendations.' },
       { icon: 'clipboard-check', title: 'Real-Time Scoring', description: 'Instant and accurate automated scoring system that mimics the real test.' },
