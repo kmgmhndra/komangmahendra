@@ -120,7 +120,7 @@ const PublicationsSection: React.FC = () => {
 
   return (
     <section className="py-20 bg-gray-950 min-h-screen">
-      <div className="container mx-auto px-15">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-15">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-800 border-2 border-gray-700 rounded-full mb-6">
@@ -128,10 +128,10 @@ const PublicationsSection: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h2 className="text-8xl font-black text-gray-50 mb-6 tracking-tight">
+          <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-gray-50 mb-4 sm:mb-6 tracking-tight">
             Publications
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
             Explore my research contributions and academic publications across various fields of technology and innovation.
           </p>
         </div>
@@ -209,10 +209,10 @@ const PublicationsSection: React.FC = () => {
               </h3>
 
               {/* Journal & Date */}
-              <div className="flex items-center text-gray-400 mb-4 space-x-4">
-                <span className="font-medium">{publication.journal}</span>
-                <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
-                <div className="flex items-center space-x-2">
+              <div className="flex flex-col sm:flex-row sm:items-center text-gray-400 mb-4 gap-1 sm:gap-0 sm:space-x-4">
+                <span className="font-medium text-sm sm:text-base">{publication.journal}</span>
+                <span className="w-1 h-1 bg-gray-500 rounded-full hidden sm:block"></span>
+                <div className="flex items-center space-x-2 text-sm">
                   <Calendar className="w-4 h-4" />
                   <span>{formatDate(publication.date)}</span>
                 </div>

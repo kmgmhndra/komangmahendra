@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 
 // Definisikan tipe untuk item navigasi
 type NavItem = {
@@ -21,6 +22,7 @@ export default function Header() {
     const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null);
     const [activeRect, setActiveRect] = useState<DOMRect | null>(null);
     const [activeSection, setActiveSection] = useState<string>('');
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
     // Efek untuk mendeteksi section yang sedang aktif saat scroll
@@ -71,17 +73,26 @@ export default function Header() {
         }
     }, [activeSection]);
 
+    // Close mobile menu when scrolling
+    useEffect(() => {
+        const handleScroll = () => {
+            if (mobileMenuOpen) setMobileMenuOpen(false);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [mobileMenuOpen]);
+
     // Fungsi untuk menangani smooth scroll saat menu di-klik
     const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault(); // Mencegah link melompat instan
+        e.preventDefault();
         const href = e.currentTarget.getAttribute('href');
         if (!href) return;
 
-        const targetId = href.substring(1); // Ambil ID section (cth: 'about')
+        const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
-            const headerHeight = 80; // Sesuaikan dengan tinggi header Anda jika diperlukan
+            const headerHeight = 80;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 
             window.scrollTo({
@@ -89,9 +100,11 @@ export default function Header() {
                 behavior: 'smooth',
             });
             
-            // Opsional: Memperbarui URL di browser bar setelah scroll
             window.history.pushState(null, "", href);
         }
+
+        // Close mobile menu after clicking
+        setMobileMenuOpen(false);
     };
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -111,10 +124,11 @@ export default function Header() {
     };
 
     return (
-        <header className="fixed top-6 left-0 right-0 z-50 flex justify-center items-center">
+        <header className="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center items-center px-4">
+            {/* Desktop Navigation */}
             <nav
                 ref={containerRef}
-                className="relative flex items-center gap-2 rounded-full bg-black/20 backdrop-blur-lg border border-white/10 p-2 shadow-lg"
+                className="relative hidden sm:flex items-center gap-2 rounded-full bg-black/20 backdrop-blur-lg border border-white/10 p-2 shadow-lg"
                 onMouseLeave={handleMouseLeave}
             >
                 {/* Indikator untuk section aktif */}
@@ -160,7 +174,7 @@ export default function Header() {
                                 rounded-full
                                 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500
                                 ${isActive 
-                                    ? 'text-white font-bold' // Teks menjadi hitam saat aktif
+                                    ? 'text-white font-bold'
                                     : 'text-neutral-300 hover:text-white'
                                 }
                             `}
@@ -171,6 +185,46 @@ export default function Header() {
                     );
                 })}
             </nav>
+
+            {/* Mobile Navigation */}
+            <div className="sm:hidden flex items-center">
+                <button
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="relative z-50 p-3 rounded-full bg-black/30 backdrop-blur-lg border border-white/10 shadow-lg"
+                    aria-label="Toggle menu"
+                >
+                    {mobileMenuOpen ? (
+                        <X className="w-5 h-5 text-white" />
+                    ) : (
+                        <Menu className="w-5 h-5 text-white" />
+                    )}
+                </button>
+
+                {/* Mobile menu overlay */}
+                {mobileMenuOpen && (
+                    <div className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md flex items-center justify-center">
+                        <nav className="flex flex-col items-center gap-6">
+                            {navItems.map((item) => {
+                                const isActive = activeSection === item.href;
+                                return (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={handleSmoothScroll}
+                                        className={`text-2xl font-medium transition-colors duration-300 ${
+                                            isActive
+                                                ? 'text-white font-bold'
+                                                : 'text-neutral-400 hover:text-white'
+                                        }`}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
+                        </nav>
+                    </div>
+                )}
+            </div>
         </header>
     );
 }

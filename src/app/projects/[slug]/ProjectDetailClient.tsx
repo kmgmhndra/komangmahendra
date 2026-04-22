@@ -57,7 +57,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
     return (
-        <div className="bg-gray-900 text-white min-h-screen relative">
+        <div className="bg-gray-900 text-white min-h-screen relative overflow-x-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -90,7 +90,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                         <div className="mb-8">
                             <Link
                                 href="/?section=projects"
-                                className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl border border-gray-700/50 rounded-full hover:border-cyan-400/50 transition-all duration-300"
+                                className="group inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl border border-gray-700/50 rounded-full hover:border-cyan-400/50 transition-all duration-300 text-sm sm:text-base"
                             >
                                 <span className="transform group-hover:-translate-x-1 transition-transform duration-300 text-cyan-400">←</span>
                                 <span className="font-medium">Back to Projects</span>
@@ -106,12 +106,12 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mb-4 sm:mb-6 leading-tight">
                                 <span className="bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">
                                     {project.title.split(' ').map((word, i) => (
                                         <span
                                             key={i}
-                                            className="inline-block hover:scale-110 transition-transform duration-300 cursor-default mr-4"
+                                            className="inline-block hover:scale-110 transition-transform duration-300 cursor-default mr-2 sm:mr-4"
                                         >
                                             {word}
                                         </span>
@@ -119,7 +119,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                 </span>
                             </h1>
                             
-                            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                            <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-2">
                                 {project.description}
                             </p>
 
@@ -168,7 +168,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 {/* Content Grid */}
                 <section className="px-4 pb-16">
                     <div className="container mx-auto max-w-6xl">
-                        <div className="grid lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                             {/* Main Content */}
                             <div className="lg:col-span-2 space-y-12">
                                 {/* Project Overview */}
@@ -279,7 +279,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                                                 rel="noopener noreferrer"
                                                 className="group flex items-center justify-center w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
                                             >
-                                                Launch Demo
+                                                View Website
                                                 <ArrowUpRight className="w-5 h-5 ml-2 transform group-hover:rotate-12 transition-transform duration-300" />
                                             </a>
                                         )}

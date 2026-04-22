@@ -7,8 +7,8 @@ import { LoaderProvider } from '@/context/LoaderContext';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Interactive 3D Portfolio",
+  title: "Komang Mahendra | Front-End Developer Portfolio",
+  description: "Portfolio of Komang Mahendra — a passionate Front-End Developer focused on building beautiful and interactive digital experiences with React, Next.js, and Three.js.",
 };
 
 export default function RootLayout({

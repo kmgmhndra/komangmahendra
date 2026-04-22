@@ -28,31 +28,30 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="fixed inset-0 h-screen w-screen overflow-hidden bg-black font-sans opacity-0"
+      className="fixed inset-0 h-dvh w-screen overflow-hidden bg-black font-sans opacity-0"
     >
-
 
       {/* Overlay konten */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 z-20 flex flex-col items-center justify-start pt-28 text-center pointer-events-none md:pt-32"
+        className="absolute inset-0 z-20 flex flex-col items-center justify-start pt-20 sm:pt-28 md:pt-32 text-center pointer-events-none px-4"
       >
-        <div className="mb-4 font-semibold text-sm tracking-wider text-neutral-300 uppercase pointer-events-auto md:text-base">
+        <div className="mb-3 sm:mb-4 font-semibold text-xs sm:text-sm md:text-base tracking-wider text-neutral-300 uppercase pointer-events-auto">
           Step Inside My Portfolio
         </div>
-        <p className="max-w-md px-4 font-normal leading-relaxed text-neutral-400 pointer-events-auto md:text-base">
+        <p className="max-w-md px-4 font-normal text-sm sm:text-base leading-relaxed text-neutral-400 pointer-events-auto">
           Discover interactive projects with a focus on seamless user experience and dynamic visuals.
         </p>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 transform z-20">
+      <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 transform z-20">
         <div className="flex flex-col items-center text-neutral-400">
           <span className="mb-2 text-xs uppercase tracking-wider animate-pulse">
             Scroll Down
           </span>
-          <div className="relative h-16 w-px bg-gradient-to-b from-white/40 to-transparent">
-            <div className="absolute top-0 h-3 w-3 -translate-x-1/2 rounded-full bg-white animate-bounce" />
+          <div className="relative h-12 sm:h-16 w-px bg-gradient-to-b from-white/40 to-transparent">
+            <div className="absolute top-0 h-2 w-2 sm:h-3 sm:w-3 -translate-x-1/2 rounded-full bg-white animate-bounce" />
           </div>
         </div>
       </div>

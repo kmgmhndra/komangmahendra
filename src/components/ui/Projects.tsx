@@ -5,7 +5,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Layers, Palette } from 'lucide-react';
+import { ArrowUpRight, Layers } from 'lucide-react';
+import Image from 'next/image';
 
 // 1. Impor data dan tipe dari file terpisah yang sudah kita buat
 import { projectsData, categories } from '@/data/projects';
@@ -21,7 +22,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative z-30 min-h-screen w-full flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 py-20 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black"
+      className="relative z-30 min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-20 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black"
     >
 
       {/* Title */}
@@ -29,7 +30,7 @@ export default function Projects() {
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-5xl md:text-8xl font-black text-center mb-8 text-white"
+        className="text-4xl sm:text-5xl md:text-8xl font-black text-center mb-6 sm:mb-8 text-white"
       >
         Selected Projects
       </motion.h2>
@@ -39,13 +40,13 @@ export default function Projects() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex flex-wrap justify-center gap-4 mb-12"
+        className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12"
       >
         {categories.map((category) => (
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeCategory === category.id
+            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${activeCategory === category.id
               ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-105'
               : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white backdrop-blur-md border border-white/20'
               }`}
@@ -56,7 +57,7 @@ export default function Projects() {
         ))}
         <Link
           href="/mockups" // <-- GANTI: Arahkan ke /mockups
-          className="px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 
+          className="px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 sm:gap-2 
                      bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white 
                      backdrop-blur-md border border-white/20"
         >
@@ -78,7 +79,7 @@ export default function Projects() {
       {/* Grid Container */}
       <motion.div
         layout
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl"
+        className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl"
       >
         {filteredProjects.map((project, i) => (
           // 3. Setiap kartu dibungkus dengan <Link> yang benar
@@ -93,12 +94,14 @@ export default function Projects() {
             >
               {/* Gambar Proyek */}
               <div className="relative w-full overflow-hidden aspect-video">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/400 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-black/20 transition-all duration-300"></div>
               </div>
 
               {/* Konten Teks */}

@@ -3,7 +3,22 @@
 
 import { projectsData } from '@/data/projects';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import ProjectDetailClient from './ProjectDetailClient'; // Impor komponen Client
+
+// Fungsi untuk generate metadata SEO dinamis per proyek
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const project = projectsData.find((p) => p.slug === params.slug);
+
+  if (!project) {
+    return { title: 'Project Not Found' };
+  }
+
+  return {
+    title: `${project.title} | Komang Mahendra`,
+    description: project.description,
+  };
+}
 
 // Fungsi untuk membuat halaman statis saat proses build
 export async function generateStaticParams() {

@@ -28,7 +28,7 @@ const certificates: Certificate[] = [
     },
     {
       id: 2,
-      title: "Data Analyst Whith Python",
+      title: "Data Analyst With Python",
       issuer: "Free Code Camp",
       date: "Desember 2023",
       image: "/assets/images/certificates/CodeCamp_Seritfication-1.png",
@@ -133,7 +133,7 @@ export default function Certificates() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-5xl font-black md:text-8xl text-white mb-6">
+          <h2 className="text-4xl font-black sm:text-5xl md:text-8xl text-white mb-4 sm:mb-6">
             Certifications
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
@@ -143,7 +143,7 @@ export default function Certificates() {
       </div>
 
       <div
-        className="relative w-full max-w-7xl mx-auto flex items-center justify-center h-[500px] perspective-1000"
+        className="relative w-full max-w-7xl mx-auto flex items-center justify-center h-[350px] sm:h-[420px] md:h-[500px] perspective-1000"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -175,8 +175,8 @@ export default function Certificates() {
               stackBlur = 0;
             } else if (position === 1) {
               // Next card (right side)
-              stackX = 280;
-              stackRotateY = -25;
+              stackX = 180;
+              stackRotateY = -20;
               stackRotateZ = 3;
               stackScale = 0.85;
               stackOpacity = 0.7;
@@ -184,8 +184,8 @@ export default function Certificates() {
               stackBlur = 1;
             } else if (position === filteredCertificates.length - 1) {
               // Previous card (left side)
-              stackX = -280;
-              stackRotateY = 25;
+              stackX = -180;
+              stackRotateY = 20;
               stackRotateZ = -3;
               stackScale = 0.85;
               stackOpacity = 0.7;
@@ -215,7 +215,7 @@ export default function Certificates() {
                   damping: 25,
                   mass: 1
                 }}
-                className="absolute w-[85%] md:w-[900px] h-full transform-gpu"
+                className="absolute w-[92%] sm:w-[85%] md:w-[900px] h-full transform-gpu"
                 style={{
                   transformStyle: 'preserve-3d',
                   backfaceVisibility: 'hidden'

@@ -140,7 +140,7 @@ export default function AboutSection() {
     }, {} as Record<Skill['category'], Skill[]>);
 
     return (
-        <section id="about" className="relative z-20 min-h-screen w-full bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl flex items-center py-20 overflow-hidden">
+        <section id="about" className="relative z-20 min-h-screen w-full bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl flex items-center py-12 sm:py-20 overflow-hidden">
 
             {/* Enhanced Background decoration */}
             <div className="absolute inset-0">
@@ -160,7 +160,7 @@ export default function AboutSection() {
             }}></div>
 
             {/* Main Content Container */}
-            <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full">
+            <div className="relative z-10 max-w-8xl mx-auto px-3 sm:px-6 md:px-8 lg:px-12 w-full">
 
                 {/* Header Section */}
                 <div className="flex justify-center items-center py-5 px-4">
@@ -171,17 +171,17 @@ export default function AboutSection() {
                         animate={isInView ? "visible" : "hidden"}
                         className="mb-16 text-center"
                     >
-                        <h2 className="text-6xl sm:text-8xl font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent mb-6">
+                        <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent mb-4 sm:mb-6">
                             About Me
                         </h2>
-                        <p className="text-xl leading-relaxed text-slate-300 max-w-4xl mx-auto">
+                        <p className="text-base sm:text-xl leading-relaxed text-slate-300 max-w-4xl mx-auto px-2">
                             Full-stack developer passionate about creating exceptional digital experiences through innovative code, stunning design, and cutting-edge technology.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
 
                     {/* Education Section */}
                     <div className={`lg:col-span-1 group transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -196,7 +196,7 @@ export default function AboutSection() {
                                 {/* Higher Education */}
                                 <div>
                                     <h4 className="text-xl font-semibold text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text">
-                                        Bachelor of Iformation System
+                                        Bachelor of Information System
                                     </h4>
                                     <p className="text-sm font-medium text-slate-400 mt-1">Universitas Pendidikan Ganesha</p>
                                     <div className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-sm text-blue-300 mt-3 border border-blue-500/20">
@@ -269,7 +269,7 @@ export default function AboutSection() {
                                     <h3 className="text-2xl font-bold text-white">Technical Expertise</h3>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                                     {Object.entries(groupedSkills).map(([category, skillList], index) => (
                                         <div
                                             key={category}
@@ -325,11 +325,11 @@ export default function AboutSection() {
                 </div>
 
                 {/* Enhanced Stats Section */}
-                <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {[
                         { number: '35+', label: 'Technologies', gradient: 'from-blue-400 to-cyan-400' },
-                        { number: '1+', label: 'Years Experience', gradient: 'from-emerald-400 to-teal-400' },
-                        { number: '7', label: 'Categories Mastered', gradient: 'from-purple-400 to-pink-400' },
+                        { number: '9+', label: 'Projects Built', gradient: 'from-emerald-400 to-teal-400' },
+                        { number: '6', label: 'Publications', gradient: 'from-purple-400 to-pink-400' },
                         { number: '∞', label: 'Passion for Innovation', gradient: 'from-orange-400 to-red-400' }
                     ].map((stat, index) => (
                         <div key={stat.label} className="group relative">

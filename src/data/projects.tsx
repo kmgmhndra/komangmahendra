@@ -40,7 +40,8 @@ export const projectsData: Project[] = [
       <p>Built with modern web technologies, Dievaluasi offers a seamless, responsive experience across all devices. The comprehensive analytics dashboard empowers users to track their progress, visualize improvement patterns, and make data-driven decisions about their study strategy.</p>
     `,
     image: "/assets/images/project/web1.png",
-    githubUrl: "dievaluasi.id",
+    githubUrl: "https://github.com/rakudev2025/raku-dev",
+    liveUrl: "https://dievaluasi.id",
     category: "website",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
     status: "Live",

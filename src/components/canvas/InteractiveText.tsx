@@ -132,11 +132,7 @@ export default function InteractiveText() {
     }
   });
 
-  // Debug info (bisa dihapus pada production)
-  console.log('Responsive values:', {
-    fontSize: responsiveValues.fontSize,
-    screenInfo: responsiveValues.screenInfo
-  });
+
 
   return (
     <AnimatedText

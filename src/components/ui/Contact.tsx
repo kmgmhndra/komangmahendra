@@ -92,7 +92,7 @@ export default function Contact() {
     }, [submitStatus]);
 
     return (
-        <section id="contact" className="py-24 bg-gray-950 text-white relative overflow-hidden">
+        <section id="contact" className="py-16 sm:py-24 bg-gray-950 text-white relative overflow-hidden">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-7xl">
                 <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
                 <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -103,21 +103,21 @@ export default function Contact() {
                 initial="hidden"
                 animate={inView ? 'visible' : 'hidden'}
                 variants={containerVariants}
-                className="container mx-auto px-6 relative z-10"
+                className="container mx-auto px-4 sm:px-6 relative z-10"
             >
                 <motion.div variants={titleVariants} className="text-center mb-20">
-                    <motion.h2 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 bg-clip-text text-transparent leading-tight">
+                    <motion.h2 className="text-4xl sm:text-6xl md:text-8xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 bg-clip-text text-transparent leading-tight">
                         Get In Touch
                     </motion.h2>
                     <motion.p
                         variants={itemVariants}
-                        className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed"
+                        className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed"
                     >
                         Ready to turn your vision into reality? Let's discuss your next big project!
                     </motion.p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
                     <motion.div
                         variants={cardVariants}
                         className="bg-gray-900/70 p-8 rounded-3xl shadow-2xl border border-gray-800 backdrop-blur-md hover:border-emerald-500 transition-all duration-300"
